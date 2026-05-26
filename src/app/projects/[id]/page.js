@@ -54,6 +54,26 @@ export default function ProjectDetail() {
         <h1 style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", fontWeight: 900, marginBottom: "16px" }}>{project.title}</h1>
         <p style={{ color: "#aaa", fontSize: "1.05rem", lineHeight: 1.75, marginBottom: "24px" }}>{project.longDescription}</p>
 
+        {/* PRICE */}
+          <div style={{
+           display: "inline-flex",
+           alignItems: "center",
+          gap: "8px",
+          background: "rgba(124,58,237,0.15)",
+           border: "1px solid rgba(124,58,237,0.3)",
+           borderRadius: "12px",
+         padding: "10px 20px",
+         marginBottom: "24px",
+}       }>
+       <span style={{ color: "#a78bfa", fontSize: "0.85rem", fontWeight: 600 }}>Price</span>
+        <span style={{ color: "#fff", fontSize: "1.4rem", fontWeight: 900 }}>
+        {Array.isArray(project.price) ? project.price[0] : project.price}
+         </span>
+       </div>
+
+{/* TAGS */}
+<div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "32px" }}></div>
+
         {/* TAGS */}
         <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "32px" }}>
           {project.tags.map((tag) => (

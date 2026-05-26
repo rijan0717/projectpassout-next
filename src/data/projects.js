@@ -6,6 +6,7 @@ const projects = [
     longDescription: "A complete medicine delivery platform with user authentication, product management, order tracking, and an admin panel for managing inventory and deliveries.",
     tags: ["PHP", "MySQL", "HTML", "CSS"],
     category: ["BCA", "BIM"],
+    price:["Rs.2000"],
     screenshots: [],
   },
   {
