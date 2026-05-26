@@ -1,3 +1,4 @@
+'use client';
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FiMail, FiPhone, FiSend } from "react-icons/fi";
