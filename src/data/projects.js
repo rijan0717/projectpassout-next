@@ -4,10 +4,12 @@ const projects = [
   title: "Online Medicine Delivery System",
   description: "Full-featured online medicine delivery system with admin panel based on CRUD operation.",
   longDescription: `Online Medicine Delivery System is a fully scratch-built web application developed without any backend framework — powered entirely by core PHP and MySQL, hosted on XAMPP for local environment. The frontend is built with pure HTML and CSS, keeping it lightweight and fast. It includes a complete user authentication system and a powerful admin panel with full CRUD operations for managing medicines, orders, users, and more.
+    
+  The admin panel features a real-time dashboard displaying total users, orders, prescriptions, and medicines at a glance. Admins can manage recent orders with status tracking (Confirmed, Cancelled), handle doctor appointments, manage prescriptions uploaded by users, add/remove medicines with pricing, and respond to contact messages — all from a clean and organized interface. Screenshots of the admin panel, database structure, and frontend UI are included below.`,
 
-The admin panel features a real-time dashboard displaying total users, orders, prescriptions, and medicines at a glance. Admins can manage recent orders with status tracking (Confirmed, Cancelled), handle doctor appointments, manage prescriptions uploaded by users, add/remove medicines with pricing, and respond to contact messages — all from a clean and organized interface. Screenshots of the admin panel, database structure, and frontend UI are included below.`,
-  tags: ["PHP", "MySQL", "HTML", "CSS"],
-  category: ["BCA", "BIM"],
+  
+    tags: ["PHP", "MySQL", "HTML", "CSS"],
+  category: ["BCA", "BIM","BIT"],
   price: "Rs. 2,000",
   screenshots: ["/screenshots/Homepage-easemeds.png",
     "/screenshots/adminpane-easemeds.png",

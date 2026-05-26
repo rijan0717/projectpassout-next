@@ -38,7 +38,7 @@ export default function ProjectDetail() {
         onClick={() => router.push("/")}
         style={{ display: "flex", alignItems: "center", gap: "8px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(124,58,237,0.3)", color: "#ccc", padding: "8px 16px", borderRadius: "10px", cursor: "pointer", marginBottom: "32px", fontSize: "0.9rem" }}
       >
-        <FiArrowLeft size={16} /> Back to Projects
+        <FiArrowLeft size={16} /> Homepage
       </motion.button>
 
       {/* HEADER */}
@@ -52,8 +52,30 @@ export default function ProjectDetail() {
         </div>
 
         <h1 style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", fontWeight: 900, marginBottom: "16px" }}>{project.title}</h1>
-        <p style={{ color: "#aaa", fontSize: "1.05rem", lineHeight: 1.75, marginBottom: "24px" }}>{project.longDescription}</p>
+<p style={{
+  color: "#aaa",
+  fontSize: "1.05rem",
+  lineHeight: 1.85,
+  marginBottom: "32px",
+  maxWidth: "800px",
+  textAlign: "justify",
+  whiteSpace: "pre-line",
+}}>
+  {project.longDescription}
+</p>
 
+
+        
+
+
+        {/* TAGS */}
+        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "32px" }}>
+          {project.tags.map((tag) => (
+            <span key={tag} style={{ background: "rgba(93, 44, 44, 0.05)", color: "#ccc", fontSize: "0.85rem", padding: "5px 14px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.08)" }}>
+              {tag}
+            </span>
+          ))}
+        </div>
         {/* PRICE */}
           <div style={{
            display: "inline-flex",
@@ -70,19 +92,7 @@ export default function ProjectDetail() {
         {Array.isArray(project.price) ? project.price[0] : project.price}
          </span>
        </div>
-
-{/* TAGS */}
-<div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "32px" }}></div>
-
-        {/* TAGS */}
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "32px" }}>
-          {project.tags.map((tag) => (
-            <span key={tag} style={{ background: "rgba(255,255,255,0.05)", color: "#ccc", fontSize: "0.85rem", padding: "5px 14px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.08)" }}>
-              {tag}
-            </span>
-          ))}
-        </div>
-
+       
         {/* ACTION BUTTONS */}
         <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginBottom: "48px" }}>
           <motion.button
@@ -107,7 +117,7 @@ export default function ProjectDetail() {
         {/* SCREENSHOTS */}
         {project.screenshots && project.screenshots.length > 0 && (
           <div>
-            <h2 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "20px" }}>Screenshots</h2>
+            <h2 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "20px" }}>Attachments🔗</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "16px" }}>
               {project.screenshots.map((src, i) => (
                 <motion.img
