@@ -177,14 +177,14 @@ export default function ProjectDetail() {
         {media.length > 1 && (
           <button onClick={() => { setDirection(1); setActiveIndex((p) => (p === media.length - 1 ? 0 : p + 1)); }}
             style={{ 
-  position: "absolute", right: "8px", top: "50%", transform: "translateY(-50%)", 
-  background: "rgba(0,0,0,0.7)", 
-  border: "1px solid rgba(124,58,237,0.4)", 
-  color: "#fff", width: "36px", height: "36px", 
-  borderRadius: "50%", display: "flex", alignItems: "center", 
-  justifyContent: "center", cursor: "pointer", fontSize: "22px", zIndex: 10 
-}}
->›
+           position: "absolute", right: "8px", top: "50%", transform: "translateY(-50%)", 
+           background: "rgba(0,0,0,0.7)", 
+           border: "1px solid rgba(124,58,237,0.4)", 
+           color: "#fff", width: "36px", height: "36px", 
+          borderRadius: "50%", display: "flex", alignItems: "center", 
+          justifyContent: "center", cursor: "pointer", fontSize: "22px", zIndex: 10 
+        }}
+        >›
           </button>
         )}
 

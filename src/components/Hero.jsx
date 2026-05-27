@@ -32,7 +32,7 @@ function Hero() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
         style={{ background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.4)", borderRadius: "30px", padding: "6px 18px", fontSize: "0.85rem", color: "#a78bfa", marginBottom: "24px", display: "inline-block" }}
       >
-        🎓 Nepal&apo;s #1 College Project Marketplace
+        🎓 Nepal&apos;s #1 College Project Marketplace
       </motion.div>
 
       <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7 }}

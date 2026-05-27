@@ -21,7 +21,7 @@ function Footer() {
             <span style={{ color: "#fff" }}>Passout</span>
           </div>
           <p style={{ color: "#666", fontSize: "0.9rem", lineHeight: 1.75, maxWidth: "280px" }}>
-            University&apos; project & web development marketplace. Buy ready-made projects or get custom work done 📩
+            University&apos;s project & web development marketplace. Buy ready-made projects or get custom work done 📩
           </p>
           <div style={{ display: "flex", gap: "12px", marginTop: "20px" }}>
             {[
@@ -81,7 +81,7 @@ function Footer() {
       </div>
 
       <div style={{ maxWidth: "1100px", margin: "0 auto", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
-        <p style={{ color: "#d0c6c6", fontSize: "0.82rem" }}>© 2026 ProjectPassout Pvt. Ltd. Built for University college students.</p>
+        <p style={{ color: "#d0c6c6", fontSize: "0.82rem" }}>© 2026 ProjectPassout. Built for University students & Business Growth .</p>
         <p style={{ color: "#d0c6c6", fontSize: "0.82rem" }}>Made with ❤️ in Kathmandu</p>
       </div>
     </footer>
