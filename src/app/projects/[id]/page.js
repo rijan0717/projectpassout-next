@@ -1,13 +1,19 @@
 'use client';
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";       
 import { FiArrowLeft, FiShare2, FiMessageCircle } from "react-icons/fi";
 import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";                            
 import projects from "@/data/projects";
+
 
 export default function ProjectDetail() {
   const { id } = useParams();
   const router = useRouter();
   const project = projects.find((p) => p.id === id);
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [lightbox, setLightbox] = useState(false);
+  const [direction, setDirection] = useState(1);
 
   if (!project) return (
     <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: "16px" }}>
@@ -114,25 +120,98 @@ export default function ProjectDetail() {
           </motion.button>
         </div>
 
-        {/* SCREENSHOTS */}
-        {project.screenshots && project.screenshots.length > 0 && (
-          <div>
-            <h2 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "20px" }}>Attachments🔗</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "16px" }}>
-              {project.screenshots.map((src, i) => (
-                <motion.img
-                  key={i}
-                  src={src}
-                  alt={`${project.title} screenshot ${i + 1}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  style={{ width: "100%", borderRadius: "12px", border: "1px solid rgba(124,58,237,0.2)" }}
-                />
-              ))}
-            </div>
-          </div>
+        {/* ATTACHMENTS SLIDER */}
+{project.screenshots && project.screenshots.length > 0 && (() => {
+  const media = project.screenshots;
+  const isVideo = (src) => src?.endsWith(".mp4") || src?.endsWith(".webm") || src?.endsWith(".ogg");
+
+  return (
+    <div>
+      <h2 style={{ fontSize: "1.3rem", fontWeight: 700, marginBottom: "16px", color: "#fff" }}>
+        Attachments 🔗
+      </h2>
+
+      {/* MAIN FRAME */}
+      <div style={{ position: "relative", width: "100%", aspectRatio: "16/9", borderRadius: "16px", overflow: "hidden", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(124,58,237,0.25)", marginBottom: "12px" }}>
+        
+        <AnimatePresence custom={direction} mode="wait">
+          <motion.div
+            key={activeIndex}
+            custom={direction}
+            variants={{
+              enter: (dir) => ({ x: dir > 0 ? 80 : -80, opacity: 0 }),
+              center: { x: 0, opacity: 1, transition: { duration: 0.35, ease: "easeOut" } },
+              exit: (dir) => ({ x: dir > 0 ? -80 : 80, opacity: 0, transition: { duration: 0.25 } }),
+            }}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            style={{ position: "absolute", inset: 0 }}
+          >
+            {isVideo(media[activeIndex]) ? (
+              <video src={media[activeIndex]} controls style={{ width: "100%", height: "100%", objectFit: "contain", background: "#000" }} />
+            ) : (
+              <img src={media[activeIndex]} alt={`screenshot ${activeIndex + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        {/* PREV BUTTON */}
+        {media.length > 1 && (
+          <button onClick={() => { setDirection(-1); setActiveIndex((p) => (p === 0 ? media.length - 1 : p - 1)); }}
+            style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(124,58,237,0.3)", color: "#fff", width: "36px", height: "36px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10 }}>
+            ‹
+          </button>
         )}
+
+        {/* NEXT BUTTON */}
+        {media.length > 1 && (
+          <button onClick={() => { setDirection(1); setActiveIndex((p) => (p === media.length - 1 ? 0 : p + 1)); }}
+            style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(124,58,237,0.3)", color: "#fff", width: "36px", height: "36px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10 }}>
+            ›
+          </button>
+        )}
+
+        {/* FULLSCREEN BUTTON */}
+        {!isVideo(media[activeIndex]) && (
+          <button onClick={() => setLightbox(true)}
+            style={{ position: "absolute", top: "12px", right: "12px", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(124,58,237,0.3)", color: "#fff", width: "32px", height: "32px", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10, fontSize: "14px" }}>
+            ⤢
+          </button>
+        )}
+
+        {/* COUNTER */}
+        <div style={{ position: "absolute", bottom: "12px", right: "12px", background: "rgba(0,0,0,0.6)", color: "#ccc", fontSize: "0.75rem", padding: "3px 10px", borderRadius: "20px", zIndex: 10 }}>
+          {activeIndex + 1} / {media.length}
+        </div>
+      </div>
+
+      {/* THUMBNAILS */}
+      {media.length > 1 && (
+        <div style={{ display: "flex", gap: "8px", overflowX: "auto", paddingBottom: "4px" }}>
+          {media.map((src, i) => (
+            <button key={i} onClick={() => { setDirection(i > activeIndex ? 1 : -1); setActiveIndex(i); }}
+              style={{ flexShrink: 0, width: "80px", height: "56px", borderRadius: "8px", overflow: "hidden", border: i === activeIndex ? "2px solid #7c3aed" : "2px solid transparent", cursor: "pointer", padding: 0, background: "rgba(255,255,255,0.05)", opacity: i === activeIndex ? 1 : 0.5, transition: "all 0.2s" }}>
+              {isVideo(src)
+                ? <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", background: "#111", color: "#a78bfa", fontSize: "18px" }}>▶</div>
+                : <img src={src} alt={`thumb-${i}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              }
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+})()}
+
+{/* LIGHTBOX */}
+{lightbox && (
+  <div onClick={() => setLightbox(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.92)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: "24px" }}>
+    <button onClick={() => setLightbox(false)} style={{ position: "absolute", top: "20px", right: "20px", background: "rgba(255,255,255,0.1)", border: "none", color: "#fff", width: "36px", height: "36px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "20px" }}>✕</button>
+    <img src={project.screenshots[activeIndex]} alt="fullscreen" onClick={(e) => e.stopPropagation()} style={{ maxWidth: "100%", maxHeight: "90vh", borderRadius: "12px", objectFit: "contain" }} />
+  </div>
+)}
+        
       </motion.div>
     </div>
   );
