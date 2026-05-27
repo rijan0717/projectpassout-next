@@ -176,7 +176,7 @@ export default function ProjectDetail() {
         {/* FULLSCREEN BUTTON */}
         {!isVideo(media[activeIndex]) && (
           <button onClick={() => setLightbox(true)}
-            style={{ position: "absolute", top: "12px", right: "12px", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(124,58,237,0.3)", color: "#fff", width: "32px", height: "32px", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10, fontSize: "14px" }}>
+            style={{ position: "absolute", top: "12px", right: "12px", background: "rgba(0, 0, 0, 0.55)", border: "1px solid rgba(124,58,237,0.3)", color: "#fff", width: "32px", height: "32px", borderRadius: "8px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10, fontSize: "14px" }}>
             ⤢
           </button>
         )}
@@ -207,9 +207,56 @@ export default function ProjectDetail() {
 
 {/* LIGHTBOX */}
 {lightbox && (
-  <div onClick={() => setLightbox(false)} style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.92)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: "24px" }}>
-    <button onClick={() => setLightbox(false)} style={{ position: "absolute", top: "20px", right: "20px", background: "rgba(255,255,255,0.1)", border: "none", color: "#fff", width: "36px", height: "36px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "20px" }}>✕</button>
-    <img src={project.screenshots[activeIndex]} alt="fullscreen" onClick={(e) => e.stopPropagation()} style={{ maxWidth: "100%", maxHeight: "90vh", borderRadius: "12px", objectFit: "contain" }} />
+  <div
+    onClick={() => setLightbox(false)}
+    style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.95)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center", padding: "24px" }}
+  >
+    {/* CLOSE */}
+    <button
+      onClick={() => setLightbox(false)}
+      style={{ position: "absolute", top: "20px", right: "20px", background: "rgba(255,255,255,0.1)", border: "none", color: "#fff", width: "36px", height: "36px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "20px", zIndex: 10 }}
+    >✕</button>
+
+    {/* COUNTER */}
+    <div style={{ position: "absolute", top: "22px", left: "50%", transform: "translateX(-50%)", background: "rgba(0,0,0,0.6)", color: "#ccc", fontSize: "0.8rem", padding: "4px 14px", borderRadius: "20px", zIndex: 10 }}>
+      {activeIndex + 1} / {project.screenshots.length}
+    </div>
+
+    {/* PREV */}
+    {project.screenshots.length > 1 && (
+      <button
+        onClick={(e) => { e.stopPropagation(); setDirection(-1); setActiveIndex((p) => (p === 0 ? project.screenshots.length - 1 : p - 1)); }}
+        style={{ position: "absolute", left: "16px", top: "50%", transform: "translateY(-50%)", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(124,58,237,0.4)", color: "#fff", width: "44px", height: "44px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "28px", zIndex: 10 }}
+      >‹</button>
+    )}
+
+    {/* NEXT */}
+    {project.screenshots.length > 1 && (
+      <button
+        onClick={(e) => { e.stopPropagation(); setDirection(1); setActiveIndex((p) => (p === project.screenshots.length - 1 ? 0 : p + 1)); }}
+        style={{ position: "absolute", right: "16px", top: "50%", transform: "translateY(-50%)", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(124,58,237,0.4)", color: "#fff", width: "44px", height: "44px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "28px", zIndex: 10 }}
+      >›</button>
+    )}
+
+    {/* IMAGE with slide animation */}
+    <AnimatePresence custom={direction} mode="wait">
+      <motion.img
+        key={activeIndex}
+        custom={direction}
+        variants={{
+          enter: (dir) => ({ x: dir > 0 ? 100 : -100, opacity: 0 }),
+          center: { x: 0, opacity: 1, transition: { duration: 0.3, ease: "easeOut" } },
+          exit: (dir) => ({ x: dir > 0 ? -100 : 100, opacity: 0, transition: { duration: 0.2 } }),
+        }}
+        initial="enter"
+        animate="center"
+        exit="exit"
+        src={project.screenshots[activeIndex]}
+        alt="fullscreen"
+        onClick={(e) => e.stopPropagation()}
+        style={{ maxWidth: "calc(100% - 120px)", maxHeight: "90vh", borderRadius: "12px", objectFit: "contain" }}
+      />
+    </AnimatePresence>
   </div>
 )}
         
