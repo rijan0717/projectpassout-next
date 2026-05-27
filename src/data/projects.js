@@ -11,9 +11,22 @@ const projects = [
     tags: ["PHP", "MySQL", "HTML", "CSS"],
   category: ["BCA", "BIM","BIT"],
   price: "Rs. 2,000",
-  screenshots: ["/screenshots/Homepage-easemeds.png",
+  screenshots: ["/screenshots/signup-easemeds.png",
+    "/screenshots/login-easemeds.png",
+    "/screenshots/Homepage-easemeds.png",
+    "/screenshots/book-appoinment.png",
+    "/screenshots/my-cart.png",
+    "/screenshots/myprofile-easemeds.png",
+    "/screenshots/Khalti-api.png",
     "/screenshots/adminpane-easemeds.png",
+    "/screenshots/orders-easemeds.png",
+    "/screenshots/medicine.png",
+    "/screenshots/add-doctor.png",
+    "/screenshots/Users.png",
+    "/screenshots/coupons-easemeds.png",
+    "/screenshots/contact-message.png",
     "/screenshots/backend-easemeds.png"
+
   ],
 },
   {

@@ -4,6 +4,7 @@ import { FiArrowLeft, FiShare2, FiMessageCircle } from "react-icons/fi";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";                            
 import projects from "@/data/projects";
+import Image from "next/image";
 
 
 export default function ProjectDetail() {
