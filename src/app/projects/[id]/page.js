@@ -160,7 +160,15 @@ export default function ProjectDetail() {
         {/* PREV BUTTON */}
         {media.length > 1 && (
           <button onClick={() => { setDirection(-1); setActiveIndex((p) => (p === 0 ? media.length - 1 : p - 1)); }}
-            style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(124,58,237,0.3)", color: "#fff", width: "36px", height: "36px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10 }}>
+            style={{ 
+  position: "absolute", left: "8px", top: "50%", transform: "translateY(-50%)", 
+  background: "rgba(0,0,0,0.7)", 
+  border: "1px solid rgba(124,58,237,0.4)", 
+  color: "#fff", width: "36px", height: "36px", 
+  borderRadius: "50%", display: "flex", alignItems: "center", 
+  justifyContent: "center", cursor: "pointer", fontSize: "22px", zIndex: 10 
+}}
+>
             ‹
           </button>
         )}
@@ -168,8 +176,15 @@ export default function ProjectDetail() {
         {/* NEXT BUTTON */}
         {media.length > 1 && (
           <button onClick={() => { setDirection(1); setActiveIndex((p) => (p === media.length - 1 ? 0 : p + 1)); }}
-            style={{ position: "absolute", right: "12px", top: "50%", transform: "translateY(-50%)", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(124,58,237,0.3)", color: "#fff", width: "36px", height: "36px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", zIndex: 10 }}>
-            ›
+            style={{ 
+  position: "absolute", right: "8px", top: "50%", transform: "translateY(-50%)", 
+  background: "rgba(0,0,0,0.7)", 
+  border: "1px solid rgba(124,58,237,0.4)", 
+  color: "#fff", width: "36px", height: "36px", 
+  borderRadius: "50%", display: "flex", alignItems: "center", 
+  justifyContent: "center", cursor: "pointer", fontSize: "22px", zIndex: 10 
+}}
+>›
           </button>
         )}
 
@@ -254,7 +269,14 @@ export default function ProjectDetail() {
         src={project.screenshots[activeIndex]}
         alt="fullscreen"
         onClick={(e) => e.stopPropagation()}
-        style={{ maxWidth: "calc(100% - 120px)", maxHeight: "90vh", borderRadius: "12px", objectFit: "contain" }}
+        style={{ 
+  width: "100%",
+  maxWidth: "calc(100vw - 80px)", 
+  maxHeight: "85vh", 
+  borderRadius: "12px", 
+  objectFit: "contain" 
+}}
+
       />
     </AnimatePresence>
   </div>
