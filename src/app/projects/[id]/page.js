@@ -122,9 +122,9 @@ export default function ProjectDetail() {
         </div>
 
         {/* ATTACHMENTS SLIDER */}
-{project.screenshots && project.screenshots.length > 0 && (() => {
-  const media = project.screenshots;
-  const isVideo = (src) => src?.endsWith(".mp4") || src?.endsWith(".webm") || src?.endsWith(".ogg");
+        {project.screenshots && project.screenshots.length > 0 && (() => {
+        const media = project.screenshots;
+        const isVideo = (src) => src?.endsWith(".mp4") || src?.endsWith(".webm") || src?.endsWith(".ogg");
 
   return (
     <div>
@@ -152,7 +152,8 @@ export default function ProjectDetail() {
             {isVideo(media[activeIndex]) ? (
               <video src={media[activeIndex]} controls style={{ width: "100%", height: "100%", objectFit: "contain", background: "#000" }} />
             ) : (
-              <img src={media[activeIndex]} alt={`screenshot ${activeIndex + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src={media[activeIndex]} alt={`screenshot ${activeIndex + 1}`}
+               style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             )}
           </motion.div>
         </AnimatePresence>
