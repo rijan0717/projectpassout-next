@@ -73,7 +73,7 @@ function Footer() {
                 onMouseEnter={(e) => (e.target.style.color = "#7c3aed")}
                 onMouseLeave={(e) => (e.target.style.color = "#ddd")}
               >
-                +977-9745310259
+                +977-******
               </a>
             </div>
           </div>
@@ -82,7 +82,7 @@ function Footer() {
 
       <div style={{ maxWidth: "1100px", margin: "0 auto", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "24px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "10px" }}>
         <p style={{ color: "#d0c6c6", fontSize: "0.82rem" }}>© 2026 ProjectPassout. Built for University students & Business Growth .</p>
-        <p style={{ color: "#d0c6c6", fontSize: "0.82rem" }}>Made with ❤️ in Kathmandu--Rijan Pariyar</p>
+        <p style={{ color: "#d0c6c6", fontSize: "0.82rem" }}>Made with ❤️ in Kathmandu--Rijan </p>
       </div>
     </footer>
   );
